@@ -1,22 +1,21 @@
-<script>
-    window.addEventListener('load', loadFinished);
-    function loadFinished() {
-        // URL取得
-        const g_url = window.location.search;
-        var queryObject = new Object();
-        if (g_url) {
-            var parameters = queryString.split('&');
-            var element = parameters[0].split('=');
-            var get_taskid = decodeURIComponent(element[1]);
-        }
+window.addEventListener('load', loadFinished);
+function loadFinished() {
+// 画面のスクロール位置情報を取得
+var OffsetTop = sessionStorage.getItem("OffsetTop");
+window.scroll({
+top: OffsetTop,
+behavior: 'smooth',
+});
+// sessionStorageを削除
+sessionStorage.removeItem("OffsetTop");
+}
 
-        const id_button = "button_" + get_taskid
-        const buttonLeft = document.getElementById(id_button).getBoundingClientRect().left;
-        const buttonTop = document.getElementById(id_button).getBoundingClientRect().top;
-        window.scrollTo({
-            left: buttonLeft,
-            top: buttonTop - 300,
-            behavior: 'smooth'
-        });
-    };
-</script>
+document.addEventListener('click', event => {
+if(event.target.id === 'modify_btn') {
+//スクロール位置取得
+var location = document.documentElement.scrollTop || document.body.scrollTop;
+var location= window.pageYOffset;
+// sessionStorageに一時保存
+sessionStorage.setItem('OffsetTop', location);
+}
+});
