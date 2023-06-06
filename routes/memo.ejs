@@ -1,0 +1,22 @@
+<script>
+    window.addEventListener('load', loadFinished);
+    function loadFinished() {
+        // URL取得
+        const g_url = window.location.search;
+        var queryObject = new Object();
+        if (g_url) {
+            var parameters = queryString.split('&');
+            var element = parameters[0].split('=');
+            var get_taskid = decodeURIComponent(element[1]);
+        }
+
+        const id_button = "button_" + get_taskid
+        const buttonLeft = document.getElementById(id_button).getBoundingClientRect().left;
+        const buttonTop = document.getElementById(id_button).getBoundingClientRect().top;
+        window.scrollTo({
+            left: buttonLeft,
+            top: buttonTop - 300,
+            behavior: 'smooth'
+        });
+    };
+</script>

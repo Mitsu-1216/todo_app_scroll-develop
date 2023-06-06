@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <meta charset='utf-8'>
+      <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+      <title>
+            <%= title %>
+      </title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+            integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="title">ユーザー一覧</div>
+                  <div class="container text-center my-5">
+                        <table border="1" class="table">
+                              <tr>
+                                    <th>ユーザid</th>
+                                    <th>ユーザネーム</th>
+                                    <th>パスワード</th>
+                                    <th>アカウントの種類</th>
+                                    <th></th>
+                              </tr>
+                              <% for(let result of results){ %>
+                              <tr>
+                                    <td><%= result.id %></td>
+                                    <td><%= result.name %></td>
+                                    <td><%= result.password %></td>
+                                    <% if(result.admin_flg===1){ %>
+                                          <td>管理者</td>
+                                    <% } else { %>
+                                          <td>一般</td>
+                                    <% } %>
+                              </tr>
+                              <td><form action="/modify" method="POST">
+                                    <input type="hidden" name="default_taskid" value="<%= result.id %>" />
+                                    <input type="hidden" name="default_task" value="<%= result.name %>" />
+                                    <input type="hidden" name="default_date" value="<%= result.password %>" />
+                                    <input type="hidden" name="default_time" value="<%= result.admin_flg %>" />
+                                    <input class="btn btn-primary" type="submit" value="編集" />
+                              </form></td>
+                              <% } %>
+                        </table>
+
+                  </div>
+                  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+                        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+                        crossorigin="anonymous"></script>
+                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+                        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+                        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
